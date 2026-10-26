@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "c62a8db1-24fb-4f32-843c-6e8e8982307f",
+    "name": "BTNG 2026 - Showroom Mobil RESTful API (Arkaan Taqiyyuddin)",
+    "description": "Koleksi Postman untuk Tugas Akhir BTNG Kelas Backend UKM DNCC UDINUS 2026. Berisi seluruh pengujian 5 endpoint CRUD mobil beserta query filtering dan pencarian.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Mobil",
+      "item": [
+        {
+          "name": "1. Get All Mobils (Daftar Semua Mobil)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/mobil",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mobil"]
+            },
+            "description": "Mengambil seluruh data mobil dari database MySQL dengan format amplop message dan data."
+          },
+          "response": []
+        },
+        {
+          "name": "2. Search & Filter Mobils (Pencarian & Filter)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/mobil?search=Avanza&brand=Toyota&status=tersedia",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mobil"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Avanza",
+                  "description": "Pencarian nama atau brand mobil"
+                },
+                {
+                  "key": "brand",
+                  "value": "Toyota",
+                  "description": "Filter merk mobil"
+                },
+                {
+                  "key": "status",
+                  "value": "tersedia",
+                  "description": "Filter status ketersediaan (tersedia/sold)"
+                }
+              ]
+            },
+            "description": "Nilai Tambah: Fitur pencarian dan filter mobil."
+          },
+          "response": []
+        },
+        {
+          "name": "3. Get Detail Mobil By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/mobil/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mobil", "1"]
+            },
+            "description": "Mengambil detail 1 unit mobil berdasarkan ID."
+          },
+          "response": []
+        },
+        {
+          "name": "4. Create New Mobil (Tambah Mobil)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nama\": \"Civic Type R FL5\",\n  \"brand\": \"Honda\",\n  \"harga\": 1425000000,\n  \"tahun\": 2024,\n  \"transmisi\": \"Manual\",\n  \"bahan_bakar\": \"Bensin\",\n  \"status\": \"tersedia\",\n  \"foto\": \"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/mobil",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mobil"]
+            },
+            "description": "Menambahkan data mobil baru ke dalam database dengan validasi request."
+          },
+          "response": []
+        },
+        {
+          "name": "5. Update Mobil (Perbarui Mobil)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"harga\": 268000000,\n  \"status\": \"sold\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/mobil/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mobil", "1"]
+            },
+            "description": "Memperbarui atribut mobil yang sudah ada."
+          },
+          "response": []
+        },
+        {
+          "name": "6. Delete Mobil (Hapus Mobil)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/mobil/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mobil", "1"]
+            },
+            "description": "Menghapus unit mobil dari database."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

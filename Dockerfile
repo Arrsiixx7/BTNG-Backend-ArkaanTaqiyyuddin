@@ -1,4 +1,8 @@
-FROM php:8.3-cli-alpine
+FROM php:8.4-cli-alpine
+
+# Set environment
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV PORT=10000
 
 # Install system dependencies & PHP extensions
 RUN apk add --no-cache \
@@ -20,14 +24,12 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
-# Install PHP dependencies without dev packages
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=php+
 
 # Ensure storage directories have write permissions
 RUN chmod -R 777 storage bootstrap/cache
 
-# Environment variables defaults
-ENV PORT=10000
 EXPOSE 10000
 
 # Entrypoint to boot Laravel server on Render-assigned PORT
